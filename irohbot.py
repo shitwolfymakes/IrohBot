@@ -6,7 +6,7 @@ import tweepy
 def main():
     # auth to twitter
     auth = tweepy.OAuthHandler("CONSUMER_KEY", "CONSUMER_SECRET")
-    auth.set_access_token("ACCES_TOKEN", "ACCESS_TOKEN_SECRET")
+    auth.set_access_token("ACCESS_TOKEN", "ACCESS_TOKEN_SECRET")
 
     # create api object
     api = tweepy.API(auth)
