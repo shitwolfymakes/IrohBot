@@ -134,4 +134,4 @@ dmypy.json
 # dev stuff
 /iroh_wisdom.json
 /charlines.json
-/api_keys.json
+/config.json
