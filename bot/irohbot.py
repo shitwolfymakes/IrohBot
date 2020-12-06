@@ -3,10 +3,9 @@
 import logging
 import time
 
-import tweepy
 import schedule
 
-from .config import create_api
+from config import create_api
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger()
@@ -14,7 +13,7 @@ logger = logging.getLogger()
 
 def main():
     api = create_api()
-    schedule.every(10).seconds.do(tweet_quote(api))
+    schedule.every(10).seconds.do(tweet_quote, api)     # do() is a wrapper for functools.partial(), so use commas
 
     while True:
         schedule.run_pending()
@@ -23,6 +22,9 @@ def main():
 
 def tweet_quote(api):
     print("test!")
+    #TODO: Get a quote from the json
+    #TODO: Craft tweet with tuple containing quote data
+    #TODO: Post tweet
 
 
 if __name__ == '__main__':
