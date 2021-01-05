@@ -79,7 +79,8 @@ def convert_to_json(tuples):
         data['lines'].append({
             'name': tup[0],
             'quote': tup[1],
-            'data': None
+            'data': None,
+            'data_source': None,
         })
     return data
 
