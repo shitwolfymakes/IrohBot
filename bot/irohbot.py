@@ -25,7 +25,11 @@ def tweet_quote(api):
     if is_mako_day():
         tweet_mako()
     #TODO: Get a quote from the json
+    quote = pick_quote()
+
     #TODO: Craft tweet with tuple containing quote data
+    tweet = craft_tweet(quote)
+
     #TODO: Post tweet
 
 
@@ -39,6 +43,14 @@ def is_mako_day():
 
 def tweet_mako():
     pass
+
+
+def pick_quote():
+    return None
+
+
+def craft_tweet(quote):
+    return None
 
 
 if __name__ == '__main__':
