@@ -1,5 +1,5 @@
 """Thanks to https://realpython.com/twitter-bot-python-tweepy/ for walking me through the basics of this"""
-
+import datetime
 import logging
 import time
 
@@ -22,9 +22,23 @@ def main():
 
 def tweet_quote(api):
     print("test!")
+    if is_mako_day():
+        tweet_mako()
     #TODO: Get a quote from the json
     #TODO: Craft tweet with tuple containing quote data
     #TODO: Post tweet
+
+
+def is_mako_day():
+    today = datetime.date.today().__str__()
+    mako_day = "07-21"
+    if today[5:] == mako_day:
+        return True
+    return False
+
+
+def tweet_mako():
+    pass
 
 
 if __name__ == '__main__':
