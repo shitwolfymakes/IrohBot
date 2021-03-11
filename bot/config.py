@@ -9,7 +9,7 @@ logger = logging.getLogger()
 def create_api():
     # store environment variables
     consumer_key = os.getenv("CONSUMER_KEY")
-    consumer_secret = os.getenv("CONSUMER_SECRET")
+    consumer_secret = os.getenv("CONSUMER_SECRET_KEY")
     access_token = os.getenv("ACCESS_TOKEN")
     access_token_secret = os.getenv("ACCESS_TOKEN_SECRET")
 
@@ -26,4 +26,3 @@ def create_api():
         raise e
     logger.info("API created")
     return api
-
