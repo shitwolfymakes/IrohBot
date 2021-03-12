@@ -1,7 +1,7 @@
 FROM python:3
 
-COPY bot/config.py /bot/
-COPY bot/irohbot.py /bot/
+COPY bot/ /bot/
+COPY iroh_wisdom.json /bot/
 COPY requirements.txt /tmp
 RUN pip3 install -r /tmp/requirements.txt
 

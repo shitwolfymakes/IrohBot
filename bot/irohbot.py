@@ -1,7 +1,9 @@
 """Thanks to https://realpython.com/twitter-bot-python-tweepy/ for walking me through the basics of this"""
 import datetime
+import json
 import logging
 import os
+import random
 import time
 
 import requests
@@ -25,10 +27,9 @@ def main():
 
 
 def tweet_quote(api):
-    print("test!")
     if is_mako_day():
-        tweet_mako()
-    #TODO: Get a quote from the json
+        tweet_mako(api)
+
     quote = pick_quote()
 
     if quote[2] is not None:
@@ -55,12 +56,16 @@ def is_mako_day():
     return False
 
 
-def tweet_mako():
-    pass
+def tweet_mako(api):
+    api.update_with_media("mako_day.png", status="Thank you for everything <3")
 
 
 def pick_quote():
-    return [None, "Hello with a picture!", "https://hannahjanewrites.com/wp-content/uploads/2015/02/iroh2.png", None]
+    with open("iroh_wisdom.json") as json_file:
+        data = json.load(json_file)
+    data = data["wisdom"]
+    quote = random.randrange(0, len(data))
+    return tuple(data[quote].values())
 
 
 if __name__ == '__main__':
