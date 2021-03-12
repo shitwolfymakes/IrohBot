@@ -1,8 +1,10 @@
 """Thanks to https://realpython.com/twitter-bot-python-tweepy/ for walking me through the basics of this"""
 import datetime
 import logging
+import os
 import time
 
+import requests
 import schedule
 
 from config import create_api
@@ -13,7 +15,9 @@ logger = logging.getLogger()
 
 def main():
     api = create_api()
-    schedule.every(10).seconds.do(tweet_quote, api)     # do() is a wrapper for functools.partial(), so use commas
+    tweet_quote(api)
+    return
+    schedule.every().day.at("16:00").do(tweet_quote, api) # do() is a wrapper for functools.partial(), so use commas
 
     while True:
         schedule.run_pending()
@@ -27,10 +31,20 @@ def tweet_quote(api):
     #TODO: Get a quote from the json
     quote = pick_quote()
 
-    #TODO: Craft tweet with tuple containing quote data
-    tweet = craft_tweet(quote)
+    if quote[2] is not None:
+        filename = 'temp.jpg'
+        request = requests.get(str(quote[2]), stream=True)
+        if request.status_code == 200:
+            with open(filename, 'wb') as image:
+                for chunk in request:
+                    image.write(chunk)
 
-    #TODO: Post tweet
+            api.update_with_media(filename, status=quote[1])
+            os.remove(filename)
+        else:
+            print("Unable to download image")
+    else:
+        api.update_status(status="Hello World!")
 
 
 def is_mako_day():
@@ -46,11 +60,7 @@ def tweet_mako():
 
 
 def pick_quote():
-    return None
-
-
-def craft_tweet(quote):
-    return None
+    return [None, "Hello with a picture!", "https://hannahjanewrites.com/wp-content/uploads/2015/02/iroh2.png", None]
 
 
 if __name__ == '__main__':
