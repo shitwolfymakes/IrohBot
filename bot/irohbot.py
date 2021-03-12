@@ -21,7 +21,7 @@ def main():
 
     while True:
         schedule.run_pending()
-        time.sleep(1)
+        time.sleep(600)
 
 
 def tweet_quote(api):
