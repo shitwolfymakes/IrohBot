@@ -25,7 +25,9 @@ def main():
 
 
 def tweet_quote(api):
+    logger.info("Time to tweet!")
     if is_mako_day():
+        logger.info("Celebrating Mako")
         tweet_mako(api)
 
     quote = pick_quote()
@@ -44,6 +46,7 @@ def tweet_quote(api):
             print("Unable to download image")
     else:
         api.update_status(status="Hello World!")
+    logger.info("Tweet posted")
 
 
 def is_mako_day():
