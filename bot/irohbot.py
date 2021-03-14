@@ -20,6 +20,7 @@ def main():
     schedule.every().day.at("16:00").do(tweet_quote, api) # do() is a wrapper for functools.partial(), so use commas
 
     while True:
+        logger.info("Checking time...")
         schedule.run_pending()
         time.sleep(55)
 
