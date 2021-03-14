@@ -20,9 +20,16 @@ def main():
     schedule.every().day.at("16:00").do(tweet_quote, api) # do() is a wrapper for functools.partial(), so use commas
 
     while True:
+        n = schedule.idle_seconds()
         logger.info("Checking time...")
+        logger.info("Time to next job: %d seconds" % n)
+        if n is None:
+            # no more jobs
+            break
+        elif n > 0:
+            # sleep exactly the right amount of time
+            time.sleep(n)
         schedule.run_pending()
-        time.sleep(55)
 
 
 def tweet_quote(api):
