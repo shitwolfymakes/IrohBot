@@ -8,6 +8,7 @@ import time
 
 import requests
 import schedule
+import tweepy
 
 from config import create_api
 
@@ -22,16 +23,10 @@ def main():
     schedule.every().day.at("16:00").do(tweet_quote, api) # do() is a wrapper for functools.partial(), so use commas
 
     while True:
-        n = schedule.idle_seconds()
-        logger.info("Checking time...")
-        logger.info("Time to next job: %d seconds" % n)
-        if n is None:
-            # no more jobs
-            break
-        elif n > 0:
-            # sleep exactly the right amount of time
-            time.sleep(n)
+        logger.info("Running jobs...")
         schedule.run_pending()
+        follow_followers(api)
+        time.sleep(30)
 
 
 def tweet_quote(api):
@@ -77,6 +72,14 @@ def pick_quote():
     data = data["wisdom"]
     quote = random.randrange(0, len(data))
     return tuple(data[quote].values())
+
+
+def follow_followers(api):
+    logger.info("Retrieving and following followers")
+    for follower in tweepy.Cursor(api.followers).items():
+        if not follower.following:
+            logger.info(f"Following {follower.name}")
+            follower.follow()
 
 
 if __name__ == '__main__':
