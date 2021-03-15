@@ -1,10 +1,10 @@
 """Thanks to https://realpython.com/twitter-bot-python-tweepy/ for walking me through the basics of this"""
-import datetime
 import json
 import logging
 import os
 import random
 import time
+from datetime import datetime, date
 
 import requests
 import schedule
@@ -19,7 +19,7 @@ logger = logging.getLogger()
 def main():
     api = create_api()
     logger.info("Restarting!")
-    api.update_status("Restarting!")
+    api.update_status("Restarting at %s!" % datetime.now())
     schedule.every().day.at("16:00").do(tweet_quote, api) # do() is a wrapper for functools.partial(), so use commas
 
     while True:
@@ -55,7 +55,7 @@ def tweet_quote(api):
 
 
 def is_mako_day():
-    today = datetime.date.today().__str__()
+    today = date.today().__str__()
     mako_day = "07-21"
     if today[5:] == mako_day:
         return True
