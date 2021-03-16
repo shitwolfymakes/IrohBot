@@ -33,8 +33,14 @@
         {
             "name": "Iroh",
             "quote": "Things will never return to normal. But the important thing is, the Avatar gives us hope.",
+            "data": "https://tenor.com/6f5B.gif",
+            "data_source": null
+        },
+        {
+            "name": "Iroh",
+            "quote": "Take care of yourselves. Never be afraid to reach out to those who can help you!",
             "data": "https://64.media.tumblr.com/62dbb64e8209d4b557e4c20a364ebcb2/tumblr_ou6qq0ktS01uqtpmyo3_500.gif",
-            "data_source": "Take care of yourselves. Never be afraid to reach out to those who can help you!"
+            "data_source": null
         },
         {
             "name": "Iroh",
@@ -255,7 +261,7 @@
         {
             "name": "Iroh",
             "quote": "With a poor stance you are unbalanced, and you can be easily knocked over. With a solid stance, you are a much more serious threat.",
-            "data": null,
+            "data": "https://tenor.com/brrLe.gif",
             "data_source": null
         },
         {
