@@ -36,7 +36,9 @@ def tweet_quote(api):
         tweet_mako(api)
 
     quote = pick_quote()
+    status = quote[1]
 
+    # if quote has linked media
     if quote[2] is not None:
         filename = 'temp.jpg'
         request = requests.get(str(quote[2]), stream=True)
@@ -44,13 +46,15 @@ def tweet_quote(api):
             with open(filename, 'wb') as image:
                 for chunk in request:
                     image.write(chunk)
-
-            api.update_with_media(filename, status=quote[1])
+            if quote[3] is not None:
+                status = "%s Art source: %s" % (quote[1], quote[3])
+            api.update_with_media(filename, status=status)
             os.remove(filename)
         else:
             print("Unable to download image")
     else:
-        api.update_status(status="Hello World!")
+        # just tweet the line
+        api.update_status(status=status)
     logger.info("Tweet posted")
 
 
