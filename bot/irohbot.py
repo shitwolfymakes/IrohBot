@@ -26,7 +26,7 @@ def main():
         logger.info("Running jobs...")
         schedule.run_pending()
         follow_followers(api)
-        time.sleep(30)
+        time.sleep(60)
 
 
 def tweet_quote(api):
