@@ -19,7 +19,7 @@ logger = logging.getLogger()
 def main():
     api = create_api()
     logger.info("Restarting!")
-    api.update_status("Restarting at %s!" % datetime.now())
+    #api.update_status("Restarting at %s!" % datetime.now())
     schedule.every().day.at("16:00").do(tweet_quote, api) # do() is a wrapper for functools.partial(), so use commas
 
     while True:
