@@ -80,10 +80,13 @@ def pick_quote():
 
 def follow_followers(api):
     logger.info("Retrieving and following followers")
-    for follower in tweepy.Cursor(api.followers).items():
-        if not follower.following:
-            logger.info(f"Following {follower.name}")
-            follower.follow()
+    try:
+        for follower in tweepy.Cursor(api.followers).items():
+            if not follower.following:
+                logger.info(f"Following {follower.name}")
+                follower.follow()
+    except tweepy.error.TweepError:
+        logger.info("Unable to follow more people!")
 
 
 if __name__ == '__main__':
