@@ -18,7 +18,7 @@ def create_api():
     auth.set_access_token(access_token, access_token_secret)
 
     # create api object
-    api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True)
+    api = tweepy.API(auth)#, wait_on_rate_limit=True, wait_on_rate_limit_notify=True)
     try:
         api.verify_credentials()
     except Exception as e:
