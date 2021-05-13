@@ -1,4 +1,4 @@
-FROM python:3
+FROM python:alpine
 
 COPY bot/ /bot/
 COPY iroh_wisdom.json /bot/
